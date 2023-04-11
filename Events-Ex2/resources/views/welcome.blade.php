@@ -15,10 +15,16 @@
    
         <!-- Styles -->
         <style>
-           
+           #creador{
+            border-radius: 5px;
+           }
+           .card{
+            box-shadow: 0 0 10px #fff;
+            border: 1px solid rgb(0 0 0 / 30%);
+           }
         </style>
     </head>
-    <body>
+    <body class="text-bg-dark">
         @yield('content')
     </body>
 </html>

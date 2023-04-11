@@ -18,7 +18,7 @@ class EventSeederTable extends Seeder
         for ($i = 0; $i < 10; $i++) {
             $userIds = DB::table('users')->pluck('id');
             DB::table('events')->insert([
-                'title'=>$faker->title(),
+                'title'=>$faker->sentence,
                 'description' => $faker->text(),
                 'location' => $faker->address(),
                 'date' => $faker->date('Y-m-d'),
