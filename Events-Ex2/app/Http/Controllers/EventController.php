@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
+
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(){
         
         $events = Event::with('user')->get();
@@ -40,9 +51,14 @@ class EventController extends Controller
     
 
     public function destroy($id){
-        $event = Event::findOrFail($id);
-        $event->delete();
-    
-        return redirect()->route('events')->with('OK', 'Evento eliminado correctamente');
+        try {
+            $event = Event::findOrFail($id);
+            $event->delete();
+            return redirect()->route('events')->with('OK', 'Evento eliminado correctamente');
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(['error' => 'Ocurrió un error al eliminar el evento: ' . $th->getMessage()]);
+        }
     }
+     
+        
 }

@@ -4,27 +4,51 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Eventos</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    
         <!-- Styles -->
         <style>
-           #creador{
-            border-radius: 5px;
-           }
-           .card{
-            box-shadow: 0 0 10px #fff;
-            border: 1px solid rgb(0 0 0 / 30%);
-           }
-        </style>
+            #creador{
+                border-radius: 5px;
+            }
+            .card{
+                box-shadow: 0 0 10px #fff;
+                border: 1px solid rgb(0 0 0 / 15%);
+            }
+            .nav-masthead .nav-link {
+                color: black;
+                border-bottom: .35rem solid transparent;
+            }
+
+            .nav-masthead .nav-link:hover,
+            .nav-masthead .nav-link:focus {
+                border-bottom-color: rgba(255, 255, 255, .50);
+            }
+
+            .nav-masthead .nav-link + .nav-link {
+                margin-left: 1rem;
+            }
+
+            .nav-masthead .active {
+                color: #fff;
+                border-bottom-color: #fff;
+            }
+            
+            </style>
     </head>
-    <body class="text-bg-dark">
-        @yield('content')
-    </body>
+        @extends('layouts.app')
+        @if($errors->has('error'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {{ $errors->first('error') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        @endif
+
 </html>
