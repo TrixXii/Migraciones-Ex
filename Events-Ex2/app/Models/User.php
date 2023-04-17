@@ -14,8 +14,13 @@ class User extends Authenticatable
     
     public function events()
     {
-        return $this->hasMany(Event::class);
+        return $this->belongsTo(Event::class);
     }
+    public function attendedEvents()
+{
+    return $this->belongsToMany(Event::class, 'user_event_attendees', 'user_id', 'event_id');
+}
+
     /**
      * The attributes that are mass assignable.
      *

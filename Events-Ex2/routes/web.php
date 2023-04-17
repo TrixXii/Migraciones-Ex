@@ -18,7 +18,7 @@ Route::get('/', function(){
     return view('auth/login');
 });
 
-Route::get('/events' , [EventController::class, 'index'])->name('events');
+Route::get('/' , [EventController::class, 'index'])->name('events');
 Route::get('/events/create' , [EventController::class, 'create'])->name('create');
 Route::post('/events', [EventController::class, 'store'])->name('store');
 Route::get('/events/{id}', [EventController::class, 'show'])->name('show');

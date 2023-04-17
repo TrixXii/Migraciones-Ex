@@ -45,20 +45,20 @@ class EventController extends Controller
 
     public function show($id){
         $event = Event::with('user')->find($id);
-        
         return view('show', compact('event'));
     }
     
-
-    public function destroy($id){
+    public function destroy($id) {
         try {
             $event = Event::findOrFail($id);
             $event->delete();
-            return redirect()->route('events')->with('OK', 'Evento eliminado correctamente');
+            session()->flash('message', 'Evento eliminado correctamente');
+            return redirect()->route('events');
         } catch (\Throwable $th) {
-            return redirect()->back()->withErrors(['error' => 'Ocurrió un error al eliminar el evento: ' . $th->getMessage()]);
+            return redirect()->back()->withErrors(['error' => 'Ocurrió un error al eliminar el evento']);
         }
     }
+
      
         
 }

@@ -38,17 +38,26 @@
                 color: #fff;
                 border-bottom-color: #fff;
             }
+            .container2{
+                width: 75%;
+                margin: auto;
+            }
             
             </style>
     </head>
         @extends('layouts.app')
         @if($errors->has('error'))
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          {{ $errors->first('error') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <i class="fa"></i><span><b>{{ $errors->first('error') }}</b></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
+        @if(session()->has('message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fa"></i><span><b>{{ session()->get('message') }}</b></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
 
 </html>
