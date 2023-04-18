@@ -20,7 +20,7 @@
                 <div class="cad card-footer ">
                     <p class="card-text textoEvent"><b>Fecha: </b>{{ $event->date}}</p>
                     <div class="d-flex  ">
-                    <a href="#" class="btn btn-warning m-1">Edita</a>
+                    <a href="{{ route('editar', $event->id) }}" class="btn btn-warning m-1">Edita</a>
                     <a href="{{ route('show', $event->id) }}" class="btn btn-info m-1">Visualizar</a>
                     <form method="POST" action="{{ route('destroy', ['id' => $event->id]) }}">
                         @csrf

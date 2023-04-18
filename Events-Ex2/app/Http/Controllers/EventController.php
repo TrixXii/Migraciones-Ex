@@ -47,6 +47,34 @@ class EventController extends Controller
         $event = Event::with('user')->find($id);
         return view('show', compact('event'));
     }
+
+    public function registerAsist($id){
+        $asiste = Event::findOrFail($id);
+        $users = User::whereDoesntHave('attendedEvents', function($query) use ($asiste) {
+            $query->where('event_id', $asiste->id);
+        })->get();
+
+        return view('registerAsist', compact('asiste', 'users'));
+    }
+    
+    public function storeAttendee(Request $request, $idEvent){
+        $validatedData = $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+    
+        $user = User::findOrFail($validatedData['user_id']);
+        $event = Event::findOrFail($idEvent);
+    
+        $user->attendedEvents()->attach($event);
+    
+        return redirect()->route('show', $idEvent);
+    }
+
+    public function editar($id){
+        $editEvent = Event::findOrFail($id); // El findOrFail arrojará una excepción si no se encuentra el evento correspondiente(id)
+        return view('editar', compact('editEvent'));
+    }
+    
     
     public function destroy($id) {
         try {
@@ -55,7 +83,7 @@ class EventController extends Controller
             session()->flash('message', 'Evento eliminado correctamente');
             return redirect()->route('events');
         } catch (\Throwable $th) {
-            return redirect()->back()->withErrors(['error' => 'Ocurrió un error al eliminar el evento']);
+            return redirect()->back()->withErrors(['error' => 'No puedes eliminar el eveto. No se encuantra vació']);
         }
     }
 
