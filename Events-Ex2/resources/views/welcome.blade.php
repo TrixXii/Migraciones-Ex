@@ -57,7 +57,8 @@
             .delete-form{
                 display: none;
             }
-            #formulario-eliminar {
+            .formulario-eliminar {
+                display: none;
                 position: fixed;
                 top: 50%;
                 left: 50%;
