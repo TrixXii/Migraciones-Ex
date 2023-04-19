@@ -50,6 +50,7 @@ class EventController extends Controller
 
     public function registerAsist($id){
         $asiste = Event::findOrFail($id);
+        // El whereDoesntHave permite aplicar una condicion a una relacion
         $users = User::whereDoesntHave('attendedEvents', function($query) use ($asiste) {
             $query->where('event_id', $asiste->id);
         })->get();
@@ -71,22 +72,33 @@ class EventController extends Controller
     }
 
     public function editar($id){
-        $editEvent = Event::findOrFail($id); // El findOrFail arrojará una excepción si no se encuentra el evento correspondiente(id)
+        // El findOrFail arrojará una excepción si no se encuentra el evento correspondiente(id)
+        $editEvent = Event::findOrFail($id); 
         return view('editar', compact('editEvent'));
     }
     
+    public function update(Request $request, $id){
+        $event = Event::findOrFail($id);
+        $event->title = $request->input('nombre');
+        $event->date = $request->input('fecha');
+        $event->description = $request->input('descripcion');
+        $event->location = $request->input('location');
+        $event->save();
+
+        return redirect()->route('events');
+    }
     
     public function destroy($id) {
         try {
             $event = Event::findOrFail($id);
+            $event->attendees()->detach();
             $event->delete();
             session()->flash('message', 'Evento eliminado correctamente');
             return redirect()->route('events');
         } catch (\Throwable $th) {
-            return redirect()->back()->withErrors(['error' => 'No puedes eliminar el eveto. No se encuantra vació']);
+            return redirect()->back()->withErrors(['error' => 'No se puede eliminar el evento']);
         }
     }
-
-     
-        
+    
+ 
 }

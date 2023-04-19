@@ -27,6 +27,7 @@ Route::get('/events/{id}/register', [EventController::class, 'registerAsist'])->
 Route::post('/events/{id}/attendees', [EventController::class, 'storeAttendee'])->name('storeAttendee');
 
 Route::get('/events/{id}/edit' , [EventController::class, 'editar'])->name('editar');
+Route::put('/events/{id}', [EventController::class, 'update'])->name('update');
 
 
 Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('destroy');

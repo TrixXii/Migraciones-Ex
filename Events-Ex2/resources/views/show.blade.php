@@ -25,7 +25,7 @@
                 <a href="{{ route('registerAsist', $event->id) }}" class="btn btn-secondary m-1">Añadir Asistente</a>
                 
                 <div class="card-footer text-muted">
-                    <p><strong>Fecha publicación:</strong> {{ $event->date }}</p>
+                    <p><strong>Fecha publicación:</strong> {{ date('Y-m-d', strtotime($event->date)) }}</p>
                     <span><b>Evento creado por: </b> {{ $event->user->name }}</span>
 
                 </div>

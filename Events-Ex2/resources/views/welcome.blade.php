@@ -10,7 +10,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   
+        
         <!-- Styles -->
         <style>
             #creador{
@@ -42,7 +42,22 @@
                 width: 75%;
                 margin: auto;
             }
-            
+            .contentEvent {
+                height: 100px;
+                margin-bottom: 16px;
+                overflow: hidden;
+            }
+
+            .contentEvent.expanded {
+                height: auto; 
+            }
+
+            .card-title{
+                height: 50px;
+            }
+            .delete-form{
+                display: none;
+            }
             </style>
     </head>
         @extends('layouts.app')
