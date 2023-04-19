@@ -23,20 +23,32 @@
                         <a href="{{ route('editar', $event->id) }}" class="btn btn-warning m-1">Editar</a>
                         <a href="{{ route('show', $event->id) }}" class="btn btn-info m-1">Visualizar</a>
                         <button class="btn btn-danger m-1" onclick="mostrarFormulario()">Eliminar</button>
-                        <form id="formulario-eliminar" method="POST" action="{{ route('destroy', ['id' => $event->id]) }}" style="display: none;">
-                            @csrf
-                            @method('DELETE')
-                            <div class="alert alert-warning" role="alert" id="alerta-eliminar" style="display: none;">
-                                ¿Está seguro que desea eliminar este evento?
-                                <button type="button" class="btn btn-danger" onclick="eliminar()">Sí</button>
-                                <button type="button" class="btn btn-secondary" onclick="ocultarFormulario()">No</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>  
          </div>       
+         <form id="formulario-eliminar" method="POST" action="{{ route('destroy', ['id' => $event->id]) }}" style="display: none;">
+            @csrf
+            @method('DELETE')
+            <div class="alert alert-danger text-center" role="alert" id="alerta-eliminar" >
+                <p>¿Está seguro que desea eliminar este evento?</p>
+                <button type="button" class="btn btn-danger" onclick="eliminar()">Sí</button>
+                <button type="button" class="btn btn-secondary" onclick="ocultarFormulario()">No</button>
+            </div>
+        </form>
         @endforeach
         </div>
     </div>
+    <script>
+        function mostrarFormulario() {
+            document.getElementById('formulario-eliminar').style.display = 'block';
+}
+    function ocultarFormulario() {
+    document.getElementById('formulario-eliminar').style.display = 'none';
+}
+
+function eliminar() {
+    document.getElementById('formulario-eliminar').submit();
+}
+    </script>
 @endsection
